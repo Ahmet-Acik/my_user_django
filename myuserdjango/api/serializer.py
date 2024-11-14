@@ -6,3 +6,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 # Compare this snippet from myuserdjango/api/views.py:
+
+    def validate_email(self, value):
+        if not value.endswith('@example.com'):
+            raise serializers.ValidationError("Email must be from example.com domain")
+        return value
